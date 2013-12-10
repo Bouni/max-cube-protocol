@@ -165,7 +165,7 @@ The RF address of the cube as hexstring.
 
 ### Firmware version
 
-The firmware verion of the cube as a hex number.
+The firmware verion of the cube as a hex number. `0113` is for cube frimware version `1.1.3`
 
 ### unknown
 
@@ -185,12 +185,12 @@ Free memory Slots as a hex number.
 
 ### Cube Date
 
-The date and time are a hexstring representation of the cube date YYMMDD and time HHMM, the year is `0d` which is decimal `13`, add 2000 and you get `2013`,
+The time is a hexstring representation of the cube date YYMMDD, the year is `0d` which is decimal `13`, add 2000 and you get `2013`,
 the month `0c` is decimal `12` which means december and the day is `09` which is decimal `9`.
 
 ### Cube Time
 
-Hex `14` is decimal `20` and hex `04` is decimal `04`.
+As the cube date, the time is also a hexstring representation of HH:MM, Hex `14` is decimal `20` and hex `04` is decimal `04`.
 
 
 ## The M Message
