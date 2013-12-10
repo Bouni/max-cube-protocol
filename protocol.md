@@ -204,8 +204,6 @@ The M message looks like this:
 
 Again a hexdump:
 
-    NewDeviceSerializer.java
-
     0000000000: 4D 3A 30 30 2C 30 31 2C  56 67 49 45 41 51 4E 43  M:00,01,VgIEAQNC
     0000000010: 59 57 51 4B 37 57 6B 43  42 45 4A 31 63 6D 38 4B  YWQK7WkCBEJ1cm8K
     0000000020: 38 77 41 44 43 6C 64 76  61 47 35 36 61 57 31 74  8wADCldvaG56aW1t
@@ -226,10 +224,42 @@ Again a hexdump:
     0000000110: 49 46 4E 6A 61 47 78 68  5A 6E 70 70 62 57 31 6C  IFNjaGxhZnppbW1l
     0000000120: 63 67 51 42 0D 0A                                 cgQB..
 
+Here is the structure less clear than in an H Message. First we need to clip the first and the last two bytes (removing the M: and CR+LF) 
+The Message is comma seperated into 3 parts.
 
 
+    Description        Length      Type         Example Value
+    =====================================================================
+    Index              2           ?            00
+    Count              2           ?            01
+    Data               variable    variable     base64 encoded
+
+## Index
+
+The `00` is the index, at the moment i can not say what it is used for.
+
+## Count
+
+`01` is the count, again i cannot say what it is used for.
  
+## Data
 
+The data string is base64 encoded and contains the real data of this package. If we decode this string we get this data:
+
+    0000000000: 56 02 04 01 03 42 61 64  0A ED 69 02 04 42 75 72  V....Bad..i..Bur
+    0000000010: 6F 0A F3 00 03 0A 57 6F  68 6E 7A 69 6D 6D 65 72  o.....Wohnzimmer
+    0000000020: 0A F3 0C 04 0C 53 63 68  6C 61 66 7A 69 6D 6D 65  .....Schlafzimme
+    0000000030: 72 0A F5 40 05 02 0A ED  69 4B 45 51 30 33 37 38  r..@....iKEQ0378
+    0000000040: 30 34 30 06 48 54 20 42  61 64 01 02 0A F3 00 4B  040.HT Bad.....K
+    0000000050: 45 51 30 33 37 39 35 34  34 07 48 54 20 42 75 72  EQ0379544.HT Bur
+    0000000060: 6F 02 02 0A F3 0C 4B 45  51 30 33 37 39 35 35 36  o.....KEQ0379556
+    0000000070: 19 48 54 20 57 6F 68 6E  7A 69 6D 6D 65 72 20 42  .HT Wohnzimmer B
+    0000000080: 61 6C 6B 6F 6E 73 65 69  74 65 03 02 0A F3 79 4B  alkonseite....yK
+    0000000090: 45 51 30 33 37 39 36 36  35 1A 48 54 20 57 6F 68  EQ0379665.HT Woh
+    00000000A0: 6E 7A 69 6D 6D 65 72 20  46 65 6E 73 74 65 72 73  nzimmer Fensters
+    00000000B0: 65 69 74 65 03 02 0A F5  40 4B 45 51 30 33 38 30  eite....@KEQ0380
+    00000000C0: 31 32 30 0F 48 54 20 53  63 68 6C 61 66 7A 69 6D  120.HT Schlafzim
+    00000000D0: 6D 65 72 04 01                                    mer..
 
  
 
