@@ -1,4 +1,4 @@
-# eQ3 Cube Protocol
+# eQ3/ELV MAX! Cube Protocol
 
 ## Disclaimer
 
@@ -6,9 +6,13 @@ The main info about the eQ3 Cube Protocol comes from these sources:
 
 - http://www.domoticaforum.eu/viewtopic.php?f=66&t=6654
 - https://github.com/bietiekay/hacs/tree/master/tools/MAXDebug
+- decompiling the Original MAX Software from eQ3/ELV
 
-But i have seen that some of the information that is provided there is not correct (at least for my cube which runs firmware verison 1.1.3) 
-Thats the reason why i've started to describe the protocol here, so that everybody can contibute and profit.
+But i have seen that some of the information that is provided there is not correct (at least for my cube which runs firmware verison 1.1.3). For that reason i've started to describe the protocol here, so that everybody can contibute and profit.
+
+Feel free to send me pull request or open an issue to help me getting this right!
+
+All information in this file are valid (or at least work for me) with cube version 1.1.3.
 
 ## Finding a cube without knowing its IP address
 
@@ -80,7 +84,6 @@ A hexdump of this string:
 This is the simplest of all messages because most of the data is plain text and it is comma seperated.
 As a first step we can clip the first two and the last two characters. 
 
-    MaxCubeStateFactory.java
 
     Description        Length      Type         Example Value
     =====================================================================
