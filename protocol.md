@@ -141,19 +141,19 @@ This is the simplest of all messages because most of the data is plain text and 
 As a first step we can clip the first two and the last two characters. 
 
 
-    Description        Length      Type         Example Value
+    Description        Length      Example Value
     =====================================================================
-    Serial number      10          static       KEQ0523864
-    RF address         6           static       097F2C
-    Firmware version   4           variable     1.1.3
-    unknown            8           static       00000000
-    HTTP connection id 8           variable     477719c0
-    Duty cycle         2           ?            00
-    Free Memory Slots  2           ?            50
-    Cube date          6           variable     2013-12-09
-    Cube time          4           variable     20:04
-    State Cube Time    2           ?            03
-    NTP Counter        4           ?            0000
+    Serial number      10          KEQ0523864
+    RF address         6           097F2C
+    Firmware version   4           1.1.3
+    unknown            8           00000000
+    HTTP connection id 8           477719c0
+    Duty cycle         2           00
+    Free Memory Slots  2           50
+    Cube date          6           2013-12-09
+    Cube time          4           20:04
+    State Cube Time    2           03
+    NTP Counter        4           0000
 
 ### Serial number
 
@@ -228,21 +228,21 @@ Here is the structure less clear than in an H Message. First we need to clip the
 The Message is comma seperated into 3 parts.
 
 
-    Description        Length      Type         Example Value
+    Description        Length      Example Value
     =====================================================================
-    Index              2           ?            00
-    Count              2           ?            01
-    Data               variable    variable     base64 encoded
+    Index              2           00
+    Count              2           01
+    Data               variable    base64 encoded
 
-## Index
+### Index
 
 The `00` is the index, at the moment i can not say what it is used for.
 
-## Count
+### Count
 
-`01` is the count, again i cannot say what it is used for.
+The second part, `01` is the count. again i cannot say what it is used for.
  
-## Data
+### Data
 
 The data string is base64 encoded and contains the real data of this package. If we decode this string we get this data:
 
@@ -261,5 +261,69 @@ The data string is base64 encoded and contains the real data of this package. If
     00000000C0: 31 32 30 0F 48 54 20 53  63 68 6C 61 66 7A 69 6D  120.HT Schlafzim
     00000000D0: 6D 65 72 04 01                                    mer..
 
+The message contains metadata about the rooms and the devices in this rooms.
+
+This is the content of this data:
  
+    Description        Length      Example Value
+    =====================================================================
+    unknown            2           56 02
+    roomcount          1           4
+
+### unknown
+
+    0000000000: 56 02                                             V.
+
+At the moment i cannot say what these two bytes are.
+
+### Room count
+
+    0000000000:       04                                            .
+
+The room count says how many rooms are configured.
+
+### Room data
+    
+    0000000000:          01 03 42 61 64  0A ED 69                    ..Bad..i
+
+On the room count follow the room data for as many rooms as the room count is, here `4` times.
+The meaning of the room data is the following:
+
+    Description        Length      Example Value
+    =====================================================================
+    Roomid             1           1
+    Roomname length    1           3
+    Roomname           variable    Bad
+    Group RF Address   3           0AED69    
+
+#### Room id
+
+    0000000000:          01                                          .
+
+This is the configured room ID.
+
+#### Roomname length
+
+    0000000000:             03                                        .
+
+This tells us how much of the following bytes are the roomname.
+
+#### Roomname
+
+    0000000000:                42 61 64                                Bad
+
+The roomname is as many bytes long as the rommname length.
+A roomname length of `03` means one must read the next 3 bytes `42 61 64` which is `Bad` in ASCII.
+
+#### Group RF Adress
+
+    0000000000:                          0A ED 69                         ..i
+
+The next 3 bytes are the Group RF Address of the first device in that room.
+
+### Device count
+ 
+The device count is, like the room count, the indicator of how many devices are registered.
+
+### Device data
 
