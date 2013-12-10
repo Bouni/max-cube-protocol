@@ -67,6 +67,62 @@ The cube will immediately reply with a lot of information. The further sections 
 A message always (as far as i know) begins with a single character followed by a colon, `H:` for example.
 Furthermore a message is always ended by a CR+LF `\r\n`. In between these two marks is the content of the message.
 
+## Message types
+
+There are a lot of message types. I have not seen a lot of them yet, but the list is out of the decompiled source code so it seems to be valid.
+
+### Incoming messages
+
+  INCOMING HELLO:                       "H:"
+  INCOMING NTP SERVER:                  "F:"
+  INCOMING DEVICE LIST:                 "L:"
+  INCOMING CONFIGURATION:               "C:"
+  INCOMING METADATA:                    "M:"
+  INCOMING NEW DEVICE:                  "N:"
+  INCOMING ACKNOWLEDGE:                 "A:"
+  INCOMING ENCRYPTION:                  "E:"
+  INCOMING DECRYPTION:                  "D:"
+  INCOMING SET CREDENTIALS:             "b:"
+  INCOMING GET CREDENTIALS:             "g:"
+  INCOMING SET REMOTEACCESS:            "j:"
+  INCOMING SET USER DATA:               "p:"
+  INCOMING GET USER DATA:               "o:"
+  INCOMING CHECK PRODUCT ACTIVATION:    "v:"
+  INCOMING ACTIVATE PRODUCT:            "w:"
+  INCOMING SEND DEVICE CMD:             "S:"
+
+### Outgoing messages
+
+  OUTGOING URL:                         "u:"
+  OUTGOING INTERVAL:                    "i:"
+  OUTGOING SEND:                        "s:"
+  OUTGOING METADATA:                    "m:"
+  OUTGOING INCLUSION MODE:              "n:"
+  OUTGOING CANCEL INCLUSION MODE:       "x:"
+  OUTGOING MORE DATA:                   "g:"
+  OUTGOING QUIT:                        "q:"
+  OUTGOING ENCRYPTION:                  "e:"
+  OUTGOING DECRYPTION:                  "d:"
+  OUTGOING SET CREDENTIALS:             "B:"
+  OUTGOING GET CREDENTIALS:             "G:"
+  OUTGOING SET REMOTEACCESS:            "J:"
+  OUTGOING SET USER DATA:               "P:"
+  OUTGOING GET USER DATA:               "O:"
+  OUTGOING CHECK PRODUCT ACTIVATION:    "V:"
+  OUTGOING ACTIVATE PRODUCT:            "W:"
+  OUTGOING SEND DEVICE CMD:             "s:"
+  OUTGOING RESET:                       "a:"
+  OUTGOING RESET ERROR:                 "r:"
+  OUTGOING DELETE DEVICES:              "t:"
+  OUTGOING SET PUSHBUTTON CONFIG:       "w:"
+  OUTGOING GET DEVICE LIST:             "l:"
+  OUTGOING SET URL:                     "u:"
+  OUTGOING GET CONFIGURATION:           "c:"
+  OUTGOING TIME CONFIG:                 "v:"
+  OUTGOING NTP SERVER:                  "f:"
+  OUTGOING SEND WAKEUP:                 "z:"
+
+
 ## The H Message
 
 The H message looks like this:
