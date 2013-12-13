@@ -263,26 +263,25 @@ The data string is base64 encoded and contains the real data of this package. If
 
 The message contains metadata about the rooms and the devices in this rooms.
 
-This is the content of this data:
- 
-    Description        Length      Example Value
-    =====================================================================
-    unknown            2           56 02
-    roomcount          1           4
+### Rooms
 
-### unknown
+The first part of this block of data contains the room data for all configured rooms.
+The room data is of variable length.
+ 
+#### unknown
 
     0000000000: 56 02                                             V.
 
 At the moment i cannot say what these two bytes are.
 
-### Room count
+
+#### Room count
 
     0000000000:       04                                            .
 
 The room count says how many rooms are configured.
 
-### Room data
+#### Room data
     
     0000000000:          01 03 42 61 64  0A ED 69                    ..Bad..i
 
@@ -319,11 +318,90 @@ A roomname length of `03` means one must read the next 3 bytes `42 61 64` which 
 
     0000000000:                          0A ED 69                         ..i
 
-The next 3 bytes are the Group RF Address of the first device in that room.
+These 3 bytes are the Group RF Address of the first device in that room.
 
-### Device count
+### Devices
+    
+This is wat is left after decoding the rooms:
+
+    0000000030:             05 02 0A ED  69 4B 45 51 30 33 37 38      ....iKEQ0378
+    0000000040: 30 34 30 06 48 54 20 42  61 64 01 02 0A F3 00 4B  040.HT Bad.....K
+    0000000050: 45 51 30 33 37 39 35 34  34 07 48 54 20 42 75 72  EQ0379544.HT Bur
+    0000000060: 6F 02 02 0A F3 0C 4B 45  51 30 33 37 39 35 35 36  o.....KEQ0379556
+    0000000070: 19 48 54 20 57 6F 68 6E  7A 69 6D 6D 65 72 20 42  .HT Wohnzimmer B
+    0000000080: 61 6C 6B 6F 6E 73 65 69  74 65 03 02 0A F3 79 4B  alkonseite....yK
+    0000000090: 45 51 30 33 37 39 36 36  35 1A 48 54 20 57 6F 68  EQ0379665.HT Woh
+    00000000A0: 6E 7A 69 6D 6D 65 72 20  46 65 6E 73 74 65 72 73  nzimmer Fensters
+    00000000B0: 65 69 74 65 03 02 0A F5  40 4B 45 51 30 33 38 30  eite....@KEQ0380
+    00000000C0: 31 32 30 0F 48 54 20 53  63 68 6C 61 66 7A 69 6D  120.HT Schlafzim
+    00000000D0: 6D 65 72 04 01                                    mer..
+
+#### Device count
  
 The device count is, like the room count, the indicator of how many devices are registered.
 
-### Device data
+    0000000030:             05                                        .
+
+#### Device data
+
+    0000000030:                02 0A ED  69 4B 45 51 30 33 37 38       ...iKEQ0378
+    0000000040: 30 34 30 06 48 54 20 42  61 64 01 02 0A F3 00 4B  040.HT Bad.....K
+
+The meaning of the room data is the following:
+
+    Description        Length      Example Value
+    =====================================================================
+    Devicetype         1           2
+    RF Adress          3           0AED69
+    Serialnumber       10          KEQ0378040
+    Device name length 1           6
+    Device name        variable    HT Bad
+    Room id            1           1
+
+#### Device type
+    
+    0000000030:                02                                      .
+
+The devicetype indicates what type of device it is:
+
+    0       Cube
+    1       Heating Thermostat
+    2       Heating Thermostat Plus
+    3       Wall mounted Thermostat
+    4       Shutter contact
+    5       Push Button   
+
+#### RF Address
+
+    0000000030:                   0A ED  69                             ..i
+
+These 3 bytes are the RF Address of the device, here it is `0AED69`.
+ 
+#### Serialnumber
+
+    0000000030:                             4B 45 51 30 33 37 38           KEQ0378
+    0000000040: 30 34 30                                          040
+
+The devices serial number `KEQ0378040`
+
+#### Devie name length
+
+    0000000040:          06                                          .
+
+The number of bytes that contain the room name directly after this byte.
+
+#### Device name
+
+    0000000040:             48 54 20 42  61 64                        HT Bad
+
+The device name, `HT Bad` in this case.
+
+
+### Room id
+
+    0000000040:                                01                           .
+
+The id of the room that contains this device.    
+
+
 
