@@ -18,10 +18,12 @@ All information in this file are valid (or at least work for me) with cube versi
 
 The cube provides the possibility to send a broadcast UDP packet to the network and as soon as it receives it, it answers and we know its IP from that packet.
 
-This is the data (19 Byte) one must broadcast to UDP port 23272 to get an answer from the cube.
+This is the data (19 Byte) one must broadcast or multicast to UDP port 23272 to get an answer from the cube.
 
     0000000000: 65 51 33 4D 61 78 2A 00  2A 2A 2A 2A 2A 2A 2A 2A  eQ3Max*.********
     0000000010: 2A 2A 49                                          **I
+
+To find a specific cube on the network replace the `*` (2A) with the serial. Hence to find a specific cube send a discovery packet with the content: `"eQ3Max*\0" + serialnumber + "I"`
 
 The answer (26Byte) can be received on UDP Port 23272 and looks like this:
 
