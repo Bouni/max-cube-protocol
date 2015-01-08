@@ -24,6 +24,7 @@ The first part of the s command  consists of following fields:
 ### Base String
 
 The base string is preceding the detailed settings and determines what parameter will be set.
+	
 	* 000440000000	Base string for Temperature and Mode setting
 	* 000410000000  Base string for Program data setting
 	* 000011000000  Base string for Eco mode temperature setting
