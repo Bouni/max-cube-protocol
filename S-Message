@@ -1,0 +1,13 @@
+
+The s command is to send settings to the connected devices
+The S Message contains the response
+
+## The S Message
+ 
+The S message looks like this:
+
+    S:...
+
+The hexdump:
+
+
