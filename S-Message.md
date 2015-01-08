@@ -1,8 +1,8 @@
 
-The s command is to send settings to the connected devices
-The S Message contains the response
+The s command is to send settings to the connected devices.
+The S message contains the response.
 
-## The S Message Structure
+## The S Message
  
 The S message looks like this:
 
@@ -25,9 +25,9 @@ The first part of the s command  consists of following fields:
 
 The base string is preceding the detailed settings and determines what parameter will be set.
 	
-	* 000440000000	Base string for Temperature and Mode setting
-	* 000410000000  Base string for Program data setting
-	* 000011000000  Base string for Eco mode temperature setting
+	* 000440000000	Base string for temperature and mode setting
+	* 000410000000  Base string for program data setting
+	* 000011000000  Base string for eco mode temperature setting
 
 	* 000412000000  Base string for ConfigValveFunctions
 	* 000020000000  Base string for AddLinkPartner
@@ -169,22 +169,22 @@ It is decoded as following:
 	s:00,0,31
 
 This can be decoded as following
-    Description        Length      Example Value
-    =====================================================================
-    Duty Cycle          2           00 
-    Command Result      1           0
-	Free Memory slots	2			31
+	Description        Length      Example Value
+	=====================================================================
+	Duty Cycle          2           00 
+	Command Result      1           0
+	Free Memory Slots   2           31
 
 ### Duty Cycle
 
-The hex representation of the Duty Cycle as a percentage.
-If Cube will queue S commands in memory when % reach 100%.
+The hex representation of the duty cycle as a percentage.
+If cube will queue S commands in memory when % reach 100%.
 
 ### Command Result
 
-0:	Command processed
-1:	Command discarded
+	0:	command processed
+	1:	command discarded
 
-### Free Memory slots
+### Free Memory Slots
 
-The hex representation of the Free Memory slots
+The hex representation of the free memory slots
