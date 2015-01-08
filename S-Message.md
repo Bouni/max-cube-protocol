@@ -28,11 +28,11 @@ The base string is preceding the detailed settings and determines what parameter
 	* 000410000000  Base string for Program data setting
 	* 000011000000  Base string for Eco mode temperature setting
 
-    * 000412000000  Base string for ConfigValveFunctions
-    * 000020000000  Base string for AddLinkPartner
-    * 000021000000  Base string for RemoveLinkPartner
-    * 000022000000  Base string for SetGroupAddress
-    * 00..23000000  Base string for RemoveGroupAddress
+	* 000412000000  Base string for ConfigValveFunctions
+	* 000020000000  Base string for AddLinkPartner
+	* 000021000000  Base string for RemoveLinkPartner
+	* 000022000000  Base string for SetGroupAddress
+	* 00  23000000  Base string for RemoveGroupAddress
 
 	Note other commands exist
 
@@ -95,35 +95,35 @@ Time until indicates to which date the given temperature is set. In this example
 	s:AAQQAAAACMNJBAJEUVRhRLRVA0UgRSBFIA==
 
   
-  00 04 10 00 00 00 08 c3  49 04 02 44 51 54 61 44  |........I..DQTaD|
-  b4 55 03 45 20 45 20 45  20                       |.U.E E E |
+	00 04 10 00 00 00 08 c3  49 04 02 44 51 54 61 44  |........I..DQTaD|
+	b4 55 03 45 20 45 20 45  20                       |.U.E E E |
 
 
 ## s command eco temperature  setting
 
 	s:AAARAAAACMNJACogPQkHGAM=
 
-  00 00 11 00 00 00 08 c3  49 00 2a 20 3d 09 07 18  |........I.* =...|
-  03                                                |.|
+	00 00 11 00 00 00 08 c3  49 00 2a 20 3d 09 07 18  |........I.* =...|
+	03                                                |.|
 
 ## s command ConfigValveFunctions
     
-    s:AAQSAAAAD8OAATIM/wA=\r\n
+	s:AAQSAAAAD8OAATIM/wA=\r\n
   
 
-  00 04 12 00 00 00 0f c3  80 01 32 0c ff 00
+	00 04 12 00 00 00 0f c3  80 01 32 0c ff 00
   
 It is decoded as following:
 
-    Description        Length      Example Value
-    =====================================================================
-    Base String        6           000412000000
-    RF Address         3           0FC380
-    Room nr            1           01
-    Boost              1           32
-    Decalcification    1           0C
-    Valve maximum      1           FF
-    Valve offset       1           00
+	Description        Length      Example Value
+	=====================================================================
+	Base String        6           000412000000
+	RF Address         3           0FC380
+	Room nr            1           01
+	Boost              1           32
+	Decalcification    1           0C
+	Valve maximum      1           FF
+	Valve offset       1           00
 
 ### Boost
 
