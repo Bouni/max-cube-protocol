@@ -31,7 +31,7 @@ If the submessage length is greater than 6, these fields follow:
     Description        Length      Example Value
     =====================================================================
     Valve Position     1           128
-    Temperature         1           14
+    Temperature        1           14
     Date Until         2           9D0B
     Time Until         1           4
 
