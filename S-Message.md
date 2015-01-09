@@ -26,15 +26,15 @@ The first part of the s command  consists of following fields:
 
 The base string is preceding the detailed settings and determines what parameter will be set.
 	
-	* 000440000000	Base string for temperature and mode setting
-	* 000410000000  Base string for program data setting
-	* 000011000000  Base string for eco mode temperature setting
+	000440000000  for temperature and mode setting
+	000410000000  for program data setting
+	000011000000  for eco mode temperature setting
 
-	* 000412000000  Base string for ConfigValveFunctions
-	* 000020000000  Base string for AddLinkPartner
-	* 000021000000  Base string for RemoveLinkPartner
-	* 000022000000  Base string for SetGroupAddress
-	* 00  23000000  Base string for RemoveGroupAddress
+	000412000000  for config valve functions
+	000020000000  for add link partner
+	000021000000  for remove link partner
+	000022000000  for set group address
+	00??23000000  for remove group address
 
 	Note other commands exist
 
@@ -114,23 +114,36 @@ It is decoded as following:
     Day of week        1           02
     Temperature        1           40
     Time of day        1           49
-    Day of week (2)    1           4c
-    Temperature (2)    1           6e
-    Time of day (2)    1           40
-    Day of week (3)    1           cb
-    Temperature (3)    1           4d
-    Time of day (3)    1           20
-    Day of week (4)    1           4d
-    Temperature (4)    1           20
-    Time of day (4)    1           4d
-    Day of week (5)    1           20
+    Temperature (2)    1           4c
+    Time of day (2)    1           6e
+    Temperature (3)    1           40
+    Time of day (3)    1           cb
+    Temperature (4)    1           4d
+    Time of day (4)    1           20
     Temperature (5)    1           4d
-    Time of day (5)    1           02
+    Time of day (5)    1           20
+    Temperature (6)    1           4d
+    Time of day (6)    1           20
+    Temperature (7)    1           4d
+    Time of day (7)    1           02
 
 ### Day of week
 
-Decoding not known yet.. TODO
-
+    hex:  |    02     |
+    dual: | 0000 0010 |
+                 ||||
+                 |+++-- day: 000: saturday
+                 |           001: sunday
+                 |           010: monday
+                 |           011: tuesday
+                 |           100: wednesday
+                 |           101: thursday
+                 |           110: friday
+                 |
+                 +----- telegram: 1: set
+                                  0: not set
+                                  
+The meaning of telegram is unclear at the moment.
 
 ### Temperature
 
@@ -262,7 +275,15 @@ It is decoded as following:
 
 ### Partner Type
 
-TODO
+Partner type tells what device the partner is.
+
+	Device			Type
+	=====================================================================
+	Heating Thermostat	1 
+	Heating Thermostat Plus 2 
+	Wall Mounted Thermostat 3 
+	Shutter Contact		4
+	Push Button		5
 
 
 ## s command remove link partner
@@ -287,7 +308,15 @@ It is decoded as following:
 
 ### Partner Type
 
-TODO
+Partner type tells what device the partner is.
+
+	Device			Type
+	=====================================================================
+	Heating Thermostat	1 
+	Heating Thermostat Plus 2 
+	Wall Mounted Thermostat 3 
+	Shutter Contact		4
+	Push Button		5
 
 ## s command set group address
 
