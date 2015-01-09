@@ -18,6 +18,7 @@ The first part of the s command  consists of following fields:
 
     Description        Length      Example Value
     =====================================================================
+    Base String        6           000440000000
     RF Address         3           0FDAED
     Room nr            1           01
 
