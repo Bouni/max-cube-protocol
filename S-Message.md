@@ -334,6 +334,7 @@ It is decoded as following:
 	S:00,0,31
 
 This can be decoded as following
+
 	Description        Length      Example Value
 	=====================================================================
 	Duty Cycle          2           00 
