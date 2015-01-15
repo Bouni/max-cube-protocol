@@ -37,7 +37,8 @@ It consists of the following parts:
     =====================================================================
     Name?              8           eQ3MaxAp
     Serial number      10          KEQ0523864
-    unknown            3           >I
+    Request ID         1           >
+    Request Type       1           I
     RF address         3           097F2C
     Firmware version   2           1.1.3          
 
@@ -53,8 +54,84 @@ This is a wireshark dump of the received packet:
     User Datagram Protocol, Src Port: s102 (23272), Dst Port: s102 (23272)
     Data (26 bytes)
 
-
 You can clearly see the source  IP 192.168.178.22
+
+There are several other UDP request types
+
+    I   Identify
+    N   Get network address
+    h   get URL information
+    c   get network default info
+
+#### UDP Network request
+The network request needs to be made for a specific device hence the request  `"eQ3Max*\0" + serialnumber + "N"`
+
+For a get network address message the response is the following. 
+
+```
+    Description        Length      Example Value
+    =====================================================================
+    Name?              8           eQ3MaxAp
+    Serial number      10          KEQ0523864
+    Request ID         1           >
+    Request Type       1           N
+    IP address         4           The 4 bytes of the ip e.g. 192.168.1.9
+    Gateway address    4           The 4 bytes of the gateway e.g. 192.168.1.1
+    Netmask address    4           The 4 bytes of the netmask e.g. 255.255.255.255
+    DNS server 1       4           The 4 bytes of the dns e.g. 8.8.8.8
+    DNS server 2       4           The 4 bytes of the dns e.g. 8.8.4.4
+```
+
+#### UDP h URL request
+The URL request needs to be made for a specific device hence the request  `"eQ3Max*\0" + serialnumber + "h"`
+
+```
+00000000  65 51 33 4d 61 78 41 70  4b 45 51 30 35 36 35 30 eQ3MaxAp KEQ05650
+00000010  32 36 3e 68 00 50 6d 61  78 2e 65 71 2d 33 2e 64 26>h.Pma x.eq-3.d
+00000020  65 2c 2f 63 75 62 65                             e,/cube
+```
+
+For a URL request message the response is the following. 
+
+```
+    Description        Length      Example Value
+    =====================================================================
+    Name?              8           eQ3MaxAp
+    Serial number      10          KEQ0523864
+    Request ID         1           >
+    Request Type       1           h
+    Port               2           80
+    server address     4           max.eq-3.de
+    Separator          1           , 
+    address path       4           /cube
+
+```
+#### UDP c network default config request
+The URL request needs to be made for a specific device hence the request  `"eQ3Max*\0" + serialnumber + "c"`
+
+For a c  request message the response is the following. 
+
+```
+00000000  65 51 33 4d 61 78 41 70  4b 45 51 30 35 36 35 30 eQ3MaxAp KEQ05650
+00000010  32 36 3e 63 c0 a8 00 de  c0 a8 00 01 ff ff 00 00 26>c.... ........
+00000020  c0 a8 00 01 00 00 00 00  01 01                   ........ ..
+
+```
+
+```
+    Description        Length      Example Value
+    =====================================================================
+    Name?              8           eQ3MaxAp
+    Serial number      10          KEQ0523864
+    Request ID         1           >
+    Request Type       1           c
+    IP address         4           The 4 bytes of the ip e.g. 192.168.0.222
+    Gateway address    4           The 4 bytes of the gateway e.g. 192.168.0.1
+    Netmask address    4           The 4 bytes of the netmask e.g. 255.255.0.0
+    DNS server 1       4           The 4 bytes of the DNS e.g. 192.168.0.1
+    Unknown             6  
+```
+
 
 ## Connecting to the cube
 
