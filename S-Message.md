@@ -98,7 +98,7 @@ Time until indicates to which date the given temperature is set. In this example
 	s:AAQQAAAAD8OAAQJASUxuQMtNIE0gTSBNIA==
 
 Again the parameter is base64 encoded.
-
+w
 Converted to hex, this is: 
 
     00 04 10 00 00 00 0f c3  80 01 02 40 49 4c 6e 40
@@ -112,20 +112,13 @@ It is decoded as following:
     RF Address         3           0FC380
     Room Nr            1           01
     Day of week        1           02
-    Temperature        1           40
-    Time of day        1           49
-    Temperature (2)    1           4c
-    Time of day (2)    1           6e
-    Temperature (3)    1           40
-    Time of day (3)    1           cb
-    Temperature (4)    1           4d
-    Time of day (4)    1           20
-    Temperature (5)    1           4d
-    Time of day (5)    1           20
-    Temperature (6)    1           4d
-    Time of day (6)    1           20
-    Temperature (7)    1           4d
-    Time of day (7)    1           02
+    Temp and Time      2           4049
+    Temp and Time (2)  2           4c6e
+    Temp and Time (3)  2           40cb
+    Temp and Time (4)  2           4d20
+    Temp and Time (5)  2           4d20
+    Temp and Time (6)  2           4d20
+    Temp and Time (7)  2           4d02
 
 ### Day of week
 
@@ -145,16 +138,20 @@ It is decoded as following:
                                   
 The meaning of telegram is unclear at the moment.
 
-### Temperature
+### Temperature and Time
 
-Unlike 'temperature & mode' it seams the value must be divided by 4 to get the actual temperature
+    hex:  |    40     |    49     |
+    dual: | 0100 0000 | 0100 1001 |
+            |||| ||||   |||| |||| 
+            |||| |||+---++++-++++-- Time of day: 001001001: 06:05
+            |||| |||
+            |||| |||+-------------- Temperature: 0100000: 16
+This 16 bit word contains the temperature on the 7 MSB and Time until that temperature is set on the 9 LSB.
+Temperature value has to be divided by 2.
 
-    40 (hex) =  64 (decimal) -> 64/4 = 16
+    20 (hex) =  32 (decimal) -> 32/2 = 16
 
-
-### Time of day
-
-Unlike 'time until' it seams the value represents the value * 5 minutes since midnight.
+Time is the value * 5 minutes since midnight.
 
     49 (hex) = 73 (decimal) -> 73*5 = 365 -> 6:05
 
