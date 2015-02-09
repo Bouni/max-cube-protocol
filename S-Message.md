@@ -143,7 +143,7 @@ The meaning of telegram is unclear at the moment.
     hex:  |    40     |    49     |
     dual: | 0100 0000 | 0100 1001 |
             |||| ||||   |||| |||| 
-            |||| |||+---++++-++++-- Time of day: 001001001: 06:05
+            |||| |||+---++++-++++-- Time: 001001001: 06:05
             |||| |||
             |||| |||+-------------- Temperature: 0100000: 16
 This 16 bit word contains the temperature on the 7 MSB and Time until that temperature is set on the 9 LSB.
