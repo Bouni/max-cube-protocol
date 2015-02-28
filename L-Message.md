@@ -102,7 +102,7 @@ These two bytes can be decoded as following:
 
     0000000000:                      18
 
-The valve position indicates the position of the radiator valve. 255 is fully open, 0 is closed.
+The valve position indicates the position of the radiator valve. 100 is fully open, 0 is closed.
 
 ### Temperature
 
