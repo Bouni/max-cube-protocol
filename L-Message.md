@@ -19,27 +19,27 @@ Like the M message, the main part is base64 encoded. When decoded, it looks like
 
 This part of the messsage consists of following fields:
 
-    Description        Length      Example Value
-    =====================================================================
-    Submessage Length  1           6
-    RF Address         3           0FDAED
-    Unknown            1           09
-    Flags              2           1218
+    Offset  Description         Length      Example Value
+    ==============================================================================
+    0       Submessage Length   1           6
+    1-3     RF Address          3           0FDAED
+    4       Unknown             1           09
+    5       Flags               2           1218
 
 If the submessage length is greater than 6, these fields follow:
 
-    Description        Length      Example Value
-    =====================================================================
-    Valve Position     1           128
-    Temperature        1           14
-    Date Until         2           9D0B
-    Time Until         1           4
+    Offset  Description         Length      Example Value
+    ==============================================================================
+    6       Valve Position      1           128
+    7       Temperature         1           14
+    8-9     Date Until          2           9D0B
+    10      Time Until          1           4
 
 If the submessage length is 12 (for a WallMountedThermostat), this additional field is provided:
 
-    Description        Length      Example Value
-    =====================================================================
-    Actual Temperature 1           219
+    Offset  Description         Length      Example Value
+    ==============================================================================
+    11      Actual Temperature  1           219
 
 A L message can consist of many submessages, but is always terminated by 
 
@@ -128,6 +128,7 @@ The temperature indicates the configured temperature and the mode of a device. I
                         01=manual
                         10=vacation
                         11=boost
+
 The mode here is not updated; the mode from the second flag byte is correct though.
 
 ### Date Until
