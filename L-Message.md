@@ -35,6 +35,12 @@ If the submessage length is greater than 6, these fields follow:
     Date Until         2           9D0B
     Time Until         1           4
 
+If the submessage length is 12 (for a WallMountedThermostat), this additional field is provided:
+
+    Description        Length      Example Value
+    =====================================================================
+    Actual Temperature 1           219
+
 A L message can consist of many submessages, but is always terminated by 
 
     0000000020:        ce 00 
@@ -43,7 +49,7 @@ A L message can consist of many submessages, but is always terminated by
 
     0000000000:  0b
     
-This determines how long the following submessage will be. Eco buttons will have 8 byte long submessages, while valves have 11 byte long submessages.
+This determines how long the following submessage will be. Eco buttons will have 8 byte long submessages, while valves have 11 byte long submessages. A WallMountedThermostat adds another byte, making a 12 byte message.
 
 ### RF Address
 
@@ -103,6 +109,7 @@ These two bytes can be decoded as following:
     0000000000:                      18
 
 The valve position indicates the position of the radiator valve. 100 is fully open, 0 is closed.
+A WallMountedThermostat always returns '4' for this value.
 
 ### Temperature
 
@@ -121,6 +128,7 @@ The temperature indicates the configured temperature and the mode of a device. I
                         01=manual
                         10=vacation
                         11=boost
+The mode here is not updated; the mode from the second flag byte is correct though.
 
 ### Date Until
 
@@ -145,3 +153,6 @@ In this example the temperature is set till Aug 29, 2011.
 
 Time until indicates to which date the given temperature is set. In this example it is set to 2:00 (04 * 0,5 hours = 2:00)
 
+### Actual Temperature (WallMountedThermostat Only)
+
+Room temperature measured by the wall mounted thermostat in °C * 10. For example 0xDB = 219 = 21.9°C
