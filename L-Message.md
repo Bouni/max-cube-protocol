@@ -35,7 +35,11 @@ If the submessage length is greater than 6, these fields follow:
     8-9     Date Until          2           9D0B
     10      Time Until          1           4
 
-If the submessage length is 12 (for a WallMountedThermostat), this additional field is provided:
+Apparently if the mode is 'auto' and the valve has moved the byte at offset 9 contains the heater thermostat actual temperature:
+
+    9       Actual Temperature  1           205
+
+If the submessage length is 12 (for a WallMountedThermostat), the actual temperature is always provided here:
 
     Offset  Description         Length      Example Value
     ==============================================================================
@@ -154,6 +158,15 @@ In this example the temperature is set till Aug 29, 2011.
 
 Time until indicates to which date the given temperature is set. In this example it is set to 2:00 (04 * 0,5 hours = 2:00)
 
-### Actual Temperature (WallMountedThermostat Only)
+### Actual Temperature (HeaterThermostat)
+
+There are reports that if a HeaterThermostat is in 'auto' mode, and the valve has moved recently, the actual temperature is returned at offset 9. Switching modes from auto to manual and back might also do this.
+
+    9       Actual Temperature  1           205
+
+### Actual Temperature (WallMountedThermostat)
+
+    11      Actual Temperature  1           219
 
 Room temperature measured by the wall mounted thermostat in °C * 10. For example 0xDB = 219 = 21.9°C
+If the temperature is >25.5 C the MSB must be available somewhere else.
