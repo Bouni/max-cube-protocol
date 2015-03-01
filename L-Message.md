@@ -127,15 +127,12 @@ The temperature indicates the configured temperature and the mode of a device. I
 
     hex:  |    28     |
     dual: | 0010 1000 |
-            |||| ||||
-            ||++-++++-- temperature: 10 1000 -> 40 = temp * 2
-            ||                     (to get the actual temperature, the value must be divided by 2: 40/2 = 20)
-            ||
-            ||
-            ++--------- mode: 00=auto/weekly program
-                        01=manual
-                        10=vacation
-                        11=boost
+            | || ||||
+            | ++-++++-- temperature: 10 1000 -> 40 = temp * 2
+            |                      (to get the actual temperature, the value must be divided by 2: 40/2 = 20)
+            |
+            |
+            +---------- actual temperature MSB
 
 The mode here is not updated; the mode from the second flag byte is correct though.
 
@@ -164,13 +161,27 @@ Time until indicates to which date the given temperature is set. In this example
 
 ### Actual Temperature (HeaterThermostat)
 
-If a HeaterThermostat is in 'auto' mode, the actual temperature is sometimes returned at offset 9. This seems to only appear when the valve moves, although switching modes might also work. In adition, if the HeaterThermostat is in a room that has a linked WallMountedThermostat, this shows the temperature measured by the WallMountedThermostat instead.
+If a HeaterThermostat is in 'auto' mode, the actual temperature is sometimes returned at offset 8-9. This seems to only appear when the valve moves, although changing the set temperature might be enough. In adition, if the HeaterThermostat is in a room that has a linked WallMountedThermostat, this shows the temperature measured by the WallMountedThermostat instead.
 
-    9       Actual Temperature  1           205
+    8       Actual Temperature  2           205
 
+    offset|      8    | ... |      9    |
+    hex   |     01    |     |     32    |
+    binary| 0000 0001 | ... | 0011 0010 |
+                    |         |||| ||||
+                    +---------++++-++++--- actual temperature (°C*10): 100110010 = 30.6°C
+    
 ### Actual Temperature (WallMountedThermostat)
 
     11      Actual Temperature  1           219
 
 Room temperature measured by the wall mounted thermostat in °C * 10. For example 0xDB = 219 = 21.9°C
-If the temperature is >25.5 C the MSB must be available somewhere else.
+The temperature is represented by 9 bits; the 9th bit is available as the top bit at offset 7
+
+    offset|      7    | ... |     11    |
+    hex   |     B2    |     |     24    |
+    binary| 1011 0010 | ... | 0010 0100 |
+            | || ||||         |||| ||||
+            | ++-++++--------------------- temperature (°C*2):            110010 = 25.0°C
+            |                 |||| ||||
+            +-----------------++++-++++--- actual temperature (°C*10): 100100100 = 29.2°C
