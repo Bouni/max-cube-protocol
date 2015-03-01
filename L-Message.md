@@ -164,7 +164,7 @@ Time until indicates to which date the given temperature is set. In this example
 
 ### Actual Temperature (HeaterThermostat)
 
-If a HeaterThermostat is in 'auto' mode, and it isn't in a room with a WallMountedThermostat, the actual temperature is returned at offset 9. This appears to be updated only when the valve moves, although switching modes might also work.
+If a HeaterThermostat is in 'auto' mode, the actual temperature is sometimes returned at offset 9. This seems to only appear when the valve moves, although switching modes might also work. In adition, if the HeaterThermostat is in a room that has a linked WallMountedThermostat, this shows the temperature measured by the WallMountedThermostat instead.
 
     9       Actual Temperature  1           205
 
