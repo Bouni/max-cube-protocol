@@ -1,10 +1,11 @@
+# The S Message
 
-The s command is to send settings to the connected devices.
-The S message contains the response.
+* The s command is to send settings to the connected devices.
+* The S message contains the response.
 
-## The S Message
- 
-The S message looks like this:
+## The s Command
+
+The outgoing 's' command looks like this:
 
     s:AARAAAAAB5EAAWY=\r\n
 
@@ -354,7 +355,9 @@ It is decoded as following:
     Room Nr            1           01
 
 
-# The S Response
+## The S Message
+
+The incoming 'S' message response looks like this:
 
 	S:00,0,31
 
