@@ -1,5 +1,9 @@
 ## The L Message
 
+This message is amongst those sent by the cube on connect. Send an 'l' command to get the cube to send it again.
+    
+    l:\r\n
+
 The L message looks like this:
 
     L:Cw/a7QkSGBgoAMwACw/DcwkSGBgoAM8ACw/DgAkSGBgoAM4A
