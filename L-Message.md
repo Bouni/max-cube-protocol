@@ -39,7 +39,7 @@ If the submessage length is greater than 6, these fields follow:
     8-9     Date Until          2           9D0B
     10      Time Until          1           4
 
-Apparently if the mode is 'auto' and the valve has moved the byte at offset 9 contains the heater thermostat actual temperature:
+The byte at offset 9 sometimes contains the heater thermostat actual temperature:
 
     9       Actual Temperature  1           205
 
@@ -164,7 +164,7 @@ Time until indicates to which date the given temperature is set. In this example
 
 ### Actual Temperature (HeaterThermostat)
 
-There are reports that if a HeaterThermostat is in 'auto' mode, and the valve has moved recently, the actual temperature is returned at offset 9. Switching modes from auto to manual and back might also do this.
+If a HeaterThermostat is in 'auto' mode, and it isn't in a room with a WallMountedThermostat, the actual temperature is returned at offset 9. This appears to be updated only when the valve moves, although switching modes might also work.
 
     9       Actual Temperature  1           205
 
