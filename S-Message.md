@@ -368,8 +368,7 @@ This can be decoded as following
 
 ### Duty Cycle
 
-The hex representation of the duty cycle as a percentage.
-If cube will queue S commands in memory when % reach 100%.
+868MHz radio comms is limited to 1% transmission, i.e. 36 seconds in each hour. The cube monitors this, and returns the hex representation of the permitted duty cycle as a percentage. When this percentage reaches 100% it will queue S commands in memory or reject additional commands.
 
 ### Command Result
 
