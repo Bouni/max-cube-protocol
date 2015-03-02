@@ -1,5 +1,9 @@
 ## The L Message
 
+This message is amongst those sent by the cube on connect. Send an 'l' command to get the cube to send it again.
+    
+    l:\r\n
+
 The L message looks like this:
 
     L:Cw/a7QkSGBgoAMwACw/DcwkSGBgoAM8ACw/DgAkSGBgoAM4A
@@ -19,21 +23,31 @@ Like the M message, the main part is base64 encoded. When decoded, it looks like
 
 This part of the messsage consists of following fields:
 
-    Description        Length      Example Value
-    =====================================================================
-    Submessage Length  1           6
-    RF Address         3           0FDAED
-    Unknown            1           09
-    Flags              2           1218
+    Offset  Description         Length      Example Value
+    ==============================================================================
+    0       Submessage Length   1           6
+    1-3     RF Address          3           0FDAED
+    4       Unknown             1           09
+    5       Flags               2           1218
 
 If the submessage length is greater than 6, these fields follow:
 
-    Description        Length      Example Value
-    =====================================================================
-    Valve Position     1           128
-    Temperature        1           14
-    Date Until         2           9D0B
-    Time Until         1           4
+    Offset  Description         Length      Example Value
+    ==============================================================================
+    6       Valve Position      1           128
+    7       Temperature         1           14
+    8-9     Date Until          2           9D0B
+    10      Time Until          1           4
+
+The byte at offset 9 sometimes contains the heater thermostat actual temperature:
+
+    9       Actual Temperature  1           205
+
+If the submessage length is 12 (for a WallMountedThermostat), the actual temperature is always provided here:
+
+    Offset  Description         Length      Example Value
+    ==============================================================================
+    11      Actual Temperature  1           219
 
 A L message can consist of many submessages, but is always terminated by 
 
@@ -43,7 +57,7 @@ A L message can consist of many submessages, but is always terminated by
 
     0000000000:  0b
     
-This determines how long the following submessage will be. Eco buttons will have 8 byte long submessages, while valves have 11 byte long submessages.
+This determines how long the following submessage will be. Eco buttons will have 8 byte long submessages, while valves have 11 byte long submessages. A WallMountedThermostat adds another byte, making a 12 byte message.
 
 ### RF Address
 
@@ -102,7 +116,8 @@ These two bytes can be decoded as following:
 
     0000000000:                      18
 
-The valve position indicates the position of the radiator valve. 255 is fully open, 0 is closed.
+The valve position indicates the position of the radiator valve. 100 is fully open, 0 is closed.
+A WallMountedThermostat always returns '4' for this value.
 
 ### Temperature
 
@@ -112,15 +127,14 @@ The temperature indicates the configured temperature and the mode of a device. I
 
     hex:  |    28     |
     dual: | 0010 1000 |
-            |||| ||||
-            ||++-++++-- temperature: 10 1000 -> 40 = temp * 2
-            ||                     (to get the actual temperature, the value must be divided by 2: 40/2 = 20)
-            ||
-            ||
-            ++--------- mode: 00=auto/weekly program
-                        01=manual
-                        10=vacation
-                        11=boost
+            | || ||||
+            | ++-++++-- temperature: 10 1000 -> 40 = temp * 2
+            |                      (to get the actual temperature, the value must be divided by 2: 40/2 = 20)
+            |
+            |
+            +---------- actual temperature MSB
+
+The mode here is not updated; the mode from the second flag byte is correct though.
 
 ### Date Until
 
@@ -145,3 +159,29 @@ In this example the temperature is set till Aug 29, 2011.
 
 Time until indicates to which date the given temperature is set. In this example it is set to 2:00 (04 * 0,5 hours = 2:00)
 
+### Actual Temperature (HeaterThermostat)
+
+If a HeaterThermostat is in 'auto' mode, the actual temperature is sometimes returned at offset 8-9. This seems to only appear when the valve moves, although changing the set temperature might be enough. In adition, if the HeaterThermostat is in a room that has a linked WallMountedThermostat, this shows the temperature measured by the WallMountedThermostat instead.
+
+    8       Actual Temperature  2           205
+
+    offset|      8    | ... |      9    |
+    hex   |     01    |     |     32    |
+    binary| 0000 0001 | ... | 0011 0010 |
+                    |         |||| ||||
+                    +---------++++-++++--- actual temperature (°C*10): 100110010 = 30.6°C
+    
+### Actual Temperature (WallMountedThermostat)
+
+    11      Actual Temperature  1           219
+
+Room temperature measured by the wall mounted thermostat in °C * 10. For example 0xDB = 219 = 21.9°C
+The temperature is represented by 9 bits; the 9th bit is available as the top bit at offset 7
+
+    offset|      7    | ... |     11    |
+    hex   |     B2    |     |     24    |
+    binary| 1011 0010 | ... | 0010 0100 |
+            | || ||||         |||| ||||
+            | ++-++++--------------------- temperature (°C*2):            110010 = 25.0°C
+            |                 |||| ||||
+            +-----------------++++-++++--- actual temperature (°C*10): 100100100 = 29.2°C

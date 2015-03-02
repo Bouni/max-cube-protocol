@@ -1,10 +1,11 @@
+# The S Message
 
-The s command is to send settings to the connected devices.
-The S message contains the response.
+* The s command is to send settings to the connected devices.
+* The S message contains the response.
 
-## The S Message
- 
-The S message looks like this:
+## The s Command
+
+The outgoing 's' command looks like this:
 
     s:AARAAAAAB5EAAWY=\r\n
 
@@ -354,7 +355,9 @@ It is decoded as following:
     Room Nr            1           01
 
 
-# The S Response
+## The S Message
+
+The incoming 'S' message response looks like this:
 
 	S:00,0,31
 
@@ -368,8 +371,7 @@ This can be decoded as following
 
 ### Duty Cycle
 
-The hex representation of the duty cycle as a percentage.
-If cube will queue S commands in memory when % reach 100%.
+868MHz radio comms is limited to 1% transmission, i.e. 36 seconds in each hour. The cube monitors this, and returns the hex representation of the permitted duty cycle as a percentage. When this percentage reaches 100% it will queue S commands in memory or reject additional commands.
 
 ### Command Result
 

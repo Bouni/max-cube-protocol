@@ -51,7 +51,10 @@ Position   Length   Information
 0012       1        Is Portal Enabled
 0013-0054  66       Unknown
 0055-????  ??       Portal URL
-????-00ed  ??       Unknown
+00D5-00DA  5        TimeZone (Winter)
+00DB-00E1  7        Unknown
+00E2-00E6  5        TimeZone (Daylight Savings)
+00E7-00ED  ??       Unknown
 ```
 ## heating thermosat C Message
 
