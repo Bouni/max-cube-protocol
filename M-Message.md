@@ -29,6 +29,40 @@ Again a hexdump:
     0000000110: 49 46 4E 6A 61 47 78 68  5A 6E 70 70 62 57 31 6C  IFNjaGxhZnppbW1l
     0000000120: 63 67 51 42 0D 0A                                 cgQB..
 
+In case the data does not fit into one single M-message, the MAX!Cube will send another one immediately afterwards.
+
+Here is an example:
+
+    M:00,02,VgIMAQpXb2huemltbWVyCvMrAgtUb2lsZXR0ZSBFRwrenQMOVG9pbGV0dGUgMS4gT0cK3rgEC
+    kJhZGV6aW1tZXIK3qoFDFNjaGxhZnppbW1lcgresQYDSmFuD4lCBwlDaHJpc3RpbmEPiTYIBEZsdXIPiT
+    0KEEJhZGV6aW1tZXIgMi4gT0cPiRwLBULDvHJvD4k/DAxHw6RzdGV6aW1tZXIPiRoJC1dhc2Noa8O8Y2h
+    lD4lXNgQHOCtLRVEwMTg4NjczCFRlcnJhc3NlAQQHMblLRVEwMTg3MTkwCEZsdXJ0w7xyAQIK8ytLRVEw
+    Mzc5NTg3C1dhbmRoZWl6dW5nAQIK9P9LRVEwMzgwMDU1DkZlbnN0ZXJoZWl6dW5nAQQHMbtLRVEwMTg3MT
+    g4CEZsdXJ0w7xyAgQHMuxLRVEwMTg2ODg0B0ZlbnN0ZXICAQrenUtFUTA0MDY5NjIHSGVpenVuZwIBCt64
+    S0VRMDQwNjk4OQdIZWl6dW5nAwQIFGdLRVEwMTkwNTc3B0ZlbnN0ZXIDBAc2l0tFUTAxODU5NDUIRmx1cn
+    TDvHIEAQreqktFUTA0MDY5NzUHSGVpenVuZwQBCt8JS0VRMDQwNzA3MA5IYW5kdHVjaGVpenVuZwQEBzhT
+    S0VRMDE4ODcxMAdGZW5zdGVyBAQIFIxLRVEwMTkwNTQzFkZlbnN0ZXIgU3RyYcOfZSByZWNodHMFAQresU
+    tFUTA0MDY5ODIHSGVpenVuZwUEBzHmS0VRMDE4NzE0NhVGZW5zdGVyIFN0cmHDn2UgbGlua3MFAxBXqUxF
+    UTA5ODIxNTYOV2FuZHRoZXJtb3N0YXQBBA/u1ExFUTA3OTQ3NTIIRmx1cnTDvHIGBA/v6kxFUTA3OTQ0Nz
+    QNRmVuc3RlciBsaW5rcwYED/HnTEVRMDc5Mzk2NA5GZW5zdGVyIHJlY2h0cwYBD4lCTEVRMTAwNDYwMAdI
+    ZWl6dW5nBgQP9BVMRVEwNzkzNDA2CEZsdXJ0w7xyBwQP79FMRVEwNzk0NDk5B0ZlbnN0ZXIHAQ+JNkxFUT
+    EwMDQ1ODgHSGVpenVuZwcBD4k9TEVRMTAwNDU5NQ1IZWl6dW5nIHVudGVuCAEPiRxMRVExMDA0NTYyB0hl
+    aXp1bmcKBA/yTUxFUTA3OTM4NjIHRmVuc3RlcgoED/F+TEVRMDc5NDA2OQhGbHVydMO8cgoBD4k/TEVRMT
+    AwNDU5NwdIZWl6dW5nCwQP8YdMRVEwNzk0MDYwB0ZlbnN0ZXILBA/xSExFUTA3OTQxMjQIRmx1cnTDvHIL
+    BA/yVkxFUTA3OTM4NTMURmVuc3RlciBHYXJ0ZW4gbGlua3MMBA/yI0xFUTA3OTM5MDQVRmVuc3RlciBHYX
+    J0ZW4gcmVjaHRzDAEPiRpMRVExMDA0NTYwB0hlaXp1bmcMBA/vj0xFUTA3OTQ1NjUPRmVuc3RlciBTdHJh
+    w59lDAQP8CtMRVEwNzk0NDA5BFTDvHIDBAgUa0tFUTAxODcwNjkNRmVuc3RlciBTZWl0ZQUEBzagS0VRMD
+    E4NTkzNhVGZW5zdGVyIFN0cmHDn2UgbGlua3MBBA/wI0xFUTA3OTQ0MTYORmVuc3RlciBLw7xjaGUBAxBV
+    50xFUTA5ODI2NzYOV2FuZHRoZXJtb3N0YXQFAxBW2kxFUTA5ODIzNjgOV2FuZHRoZXJtb3N0YXQEAxBV4k
+    xFUTA5ODI2NzEOV2FuZHRoZXJtb3N0YXQHAxBZWExFUTA5ODE3MjkOV2FuZHRoZXJtb3N0YXQMAxBV6ExF
+    UTA5ODI2NzcOV2FuZHRoZXJtb3N0YXQGAxBV40xFUTA5ODI2NzIOV2FuZHRoZXJtb3N0YXQKBAcxoEtFUT
+    AxODcyMTYLV2FzY2hrw7xjaGUF\r\n
+    M:01,02,AxBV8ExFUTA5ODI2ODUOV2FuZHRoZXJtb3N0YXQJBA/v50xFUTA3OTQ0NzcNQmFsa29uZmVuc3
+    RlcgkBD4lXTEVRMTAwNDYyMRZIZWl6dW5nIHVudGVybSBGZW5zdGVyCQQP8llMRVEwNzkzODUwDkZlbnN0
+    ZXIgcmVjaHRzCQQP8bxMRVEwNzk0MDA3DUZlbnN0ZXIgbGlua3MJAQ+JOExFUTEwMDQ1OTAOSGVpenVuZy
+    BCYWxrb24JBA/yLExFUTA3OTM4OTUKQmFsa29udMO8cgkED++zTEVRMDc5NDUyOQhGbHVydMO8cgkB
+    
+
 Here is the structure less clear than in an H Message. First we need to clip the first and the last two bytes (removing the M: and CR+LF) 
 The Message is comma seperated into 3 parts.
 
@@ -41,11 +75,11 @@ The Message is comma seperated into 3 parts.
 
 ### Index
 
-The `00` is the index, at the moment i can not say what it is used for.
+The `00` is the index. When there are multiple M-messages send by the cube, this number will be increased with each message.
 
 ### Count
 
-The second part, `01` is the count. again i cannot say what it is used for.
+The second part, `01` is the count. This indicates the current number of the M-messages.
  
 ### Data
 
