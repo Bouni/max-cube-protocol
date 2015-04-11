@@ -185,3 +185,8 @@ The temperature is represented by 9 bits; the 9th bit is available as the top bi
             | ++-++++--------------------- temperature (°C*2):            110010 = 25.0°C
             |                 |||| ||||
             +-----------------++++-++++--- actual temperature (°C*10): 100100100 = 29.2°C
+
+### Window switch
+
+The windows status is mapped in the lowest two bits in the flag word. 
+Window closed: 00=auto/weekly program, window open: 10=vacation
