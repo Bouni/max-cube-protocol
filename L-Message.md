@@ -28,16 +28,16 @@ This part of the messsage consists of following fields:
     0       Submessage Length   1           6
     1-3     RF Address          3           0FDAED
     4       Unknown             1           09
-    5       Flags               2           1218
+    5-6     Flags               2           1218
 
 If the submessage length is greater than 6, these fields follow:
 
     Offset  Description         Length      Example Value
     ==============================================================================
-    6       Valve Position      1           128
-    7       Temperature         1           14
-    8-9     Date Until          2           9D0B
-    10      Time Until          1           4
+    7       Valve Position      1           128
+    8       Temperature         1           14
+    9-10    Date Until          2           9D0B
+    11      Time Until          1           4
 
 The byte at offset 9 sometimes contains the heater thermostat actual temperature:
 
@@ -47,7 +47,7 @@ If the submessage length is 12 (for a WallMountedThermostat), the actual tempera
 
     Offset  Description         Length      Example Value
     ==============================================================================
-    11      Actual Temperature  1           219
+    12      Actual Temperature  1           219
 
 A L message can consist of many submessages, but is always terminated by 
 
@@ -178,10 +178,15 @@ If a HeaterThermostat is in 'auto' mode, the actual temperature is sometimes ret
 Room temperature measured by the wall mounted thermostat in °C * 10. For example 0xDB = 219 = 21.9°C
 The temperature is represented by 9 bits; the 9th bit is available as the top bit at offset 7
 
-    offset|      7    | ... |     11    |
+    offset|      8    | ... |     12    |
     hex   |     B2    |     |     24    |
     binary| 1011 0010 | ... | 0010 0100 |
             | || ||||         |||| ||||
             | ++-++++--------------------- temperature (°C*2):            110010 = 25.0°C
             |                 |||| ||||
             +-----------------++++-++++--- actual temperature (°C*10): 100100100 = 29.2°C
+
+### Window switch
+
+The windows status is mapped in the lowest two bits in the flag word. 
+Window closed: 00=auto/weekly program, window open: 10=vacation
