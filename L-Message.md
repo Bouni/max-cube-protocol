@@ -28,16 +28,16 @@ This part of the messsage consists of following fields:
     0       Submessage Length   1           6
     1-3     RF Address          3           0FDAED
     4       Unknown             1           09
-    5       Flags               2           1218
+    5-6     Flags               2           1218
 
 If the submessage length is greater than 6, these fields follow:
 
     Offset  Description         Length      Example Value
     ==============================================================================
-    6       Valve Position      1           128
-    7       Temperature         1           14
-    8-9     Date Until          2           9D0B
-    10      Time Until          1           4
+    7       Valve Position      1           128
+    8       Temperature         1           14
+    9-10    Date Until          2           9D0B
+    11      Time Until          1           4
 
 The byte at offset 9 sometimes contains the heater thermostat actual temperature:
 
@@ -47,7 +47,7 @@ If the submessage length is 12 (for a WallMountedThermostat), the actual tempera
 
     Offset  Description         Length      Example Value
     ==============================================================================
-    11      Actual Temperature  1           219
+    12      Actual Temperature  1           219
 
 A L message can consist of many submessages, but is always terminated by 
 
