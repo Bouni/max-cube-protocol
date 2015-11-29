@@ -20,13 +20,20 @@ Various other implementations:
 * NodeJS https://github.com/georg90/max-control
 
 
+General description on how to connect to the cube can be found in [protocol](protocol.md)
+
+Info about discovery can be found  [here](Cube_Discovery.md)
 
 Currently the following messages are described
-* [H Message](H-Message.md) 
+* [A Message](A-Message.md)
 * [C Message](C-Message.md)
-* [M Message](M-Message.md)
+* [F Message](F-Message.md) 
+* [H Message](H-Message.md) 
 * [L Message](L-Message.md)
-* [S Message](S-Message.md)
+* [M Message](M-Message.md)
+* [N Message](N-Message.md)
 * [Q Message](Q-Message.md)
+* [S Message](S-Message.md)
+* [U Message](U-Message.md)
 
 If you want to contribute, pull requests are welcome!

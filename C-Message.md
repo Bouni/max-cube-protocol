@@ -56,7 +56,7 @@ Position   Length   Information
 00E2-00E6  5        TimeZone (Daylight Savings)
 00E7-00ED  ??       Unknown
 ```
-## heating thermosat C Message
+## heating thermostat C Message
 
 The first 18 bytes seem to contain the same type of information for all devices (except the Cube which seems to have one difference). The rest of the information is device specific.
 
