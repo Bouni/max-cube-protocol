@@ -48,7 +48,8 @@ The base string is preceding the detailed settings and determines what parameter
     Room nr            1           01
     Temperature  &     1           66
 	Mode (similar to the L message)
-	Date Until		   1           04  Note: Only in case of vacation mode setting. Otherwise this byte is omitted
+    Date Until         2           9d 0b  Note: Only in case of vacation mode setting. Otherwise this byte is omitted
+    Time Until         1           04     Note: Only in case of vacation mode setting. Otherwise this byte is omitted
 
 	
 	
