@@ -157,7 +157,7 @@ Time is the value * 5 minutes since midnight.
 
     49 (hex) = 73 (decimal) -> 73*5 = 365 -> 6:05
 
-## s command eco temperature  setting
+## s command temperature setting
 
 	s:AAARAAAAD8OAACshPQkHGAM=
 
@@ -187,7 +187,7 @@ It is decoded as following:
 ### Temperature
 
 Temperature comfort, temperature eco, temperature max, temperature min, temperature window open decode the same way.
-To get the actual temperature, the value muast be divided by 2.
+To get the actual temperature, the value must be divided by 2.
 
     2b (hex) = 43 (decimal) -> 43/2 = 21.5
 
