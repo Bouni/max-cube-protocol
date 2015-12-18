@@ -196,13 +196,13 @@ To get the actual temperature, the value must be divided by 2.
 
 Temperature Offset is decoded as following:
 
-    07 (hex) = 7 (decimal) -> 7/3 - 3.5 = 0
+    07 (hex) = 7 (decimal) -> 7/2 - 3.5 = 0
 
 ### Duration Window Open
 
-Duration window open is simply the time in minutes
+Duration window open is simply the time in minutes * 5
 
-    03 (hex) = 3 (decimal) -> 3 (minutes)
+    03 (hex) = 3 (decimal) -> 3*5 -> 15 (minutes)
 
 
 ## s command config valve functions
