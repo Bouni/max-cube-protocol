@@ -19,3 +19,4 @@ z:        Command
 G         Scope (G=Group/Room, A=All, D=Device)
 01        Group/Room
 ```
+
