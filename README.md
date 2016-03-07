@@ -35,5 +35,6 @@ Currently the following messages are described
 * [Q Message](Q-Message.md)
 * [S Message](S-Message.md)
 * [U Message](U-Message.md)
+* [Z Message](Z-Message.md)
 
 If you want to contribute, pull requests are welcome!
