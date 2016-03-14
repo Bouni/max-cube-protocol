@@ -38,6 +38,8 @@ The base string is preceding the detailed settings and determines what parameter
 	00??23000000  for remove group address
 
 	Note other commands exist
+	Note. The 04 on 2nd byte in the base string seems to be depending on whether the command is send to a room or to a device.
+	For devices not tied to a room this byte should be 0. The MAX! application software always links an device to a room.
 
 ## the s Temperature and Mode setting command
 

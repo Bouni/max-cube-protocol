@@ -49,14 +49,22 @@ The second and last field contains a Base64 encoded string with the configuratio
 Position   Length   Information
 ===================================================
 0012       1        Is Portal Enabled
-0013-0054  66       Unknown
-0055-????  ??       Portal URL
+0013-0033  32       Pushbutton Up config
+0034-0054  32       Pushbutton down config
+0055-00D4  127      Portal URL
 00D5-00DA  5        TimeZone (Winter)
-00DB-00E1  7        Unknown
+00DB-00DB  1        TimeZone (Winter) - Month
+00DC-00DC  1        TimeZone (Winter) - Weekday
+00DD-00DD  1        TimeZone (Winter) - Hour
+00DE-00E1  4        TimeZone (Winter) - offset to UTC
 00E2-00E6  5        TimeZone (Daylight Savings)
-00E7-00ED  ??       Unknown
+00E7-00E7  1        TimeZone (Daylight Savings) - Month
+00E8-00E8  1        TimeZone (Daylight Savings) - Weekday
+00E9-00E9  1        TimeZone (Daylight Savings) - Hour
+00EA-00ED  4        TimeZone (Daylight Savings) - offset to UTC
+
 ```
-## heating thermostat C Message
+## Heating thermostat C Message
 
 The first 18 bytes seem to contain the same type of information for all devices (except the Cube which seems to have one difference). The rest of the information is device specific.
 
