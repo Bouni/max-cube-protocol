@@ -34,6 +34,7 @@ Currently the following messages are described
 * [N Message](N-Message.md)
 * [Q Message](Q-Message.md)
 * [S Message](S-Message.md)
+* [T Command](T-Command.md)
 * [U Message](U-Message.md)
 * [Z Message](Z-Message.md)
 
