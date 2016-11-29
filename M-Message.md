@@ -1,3 +1,21 @@
+## The m Command
+
+The m command writes a block of metadata to the Cube. Each block has an index, starting at 0.
+
+Send `m:` to the Cube, followed by a 2-digit index, a comma, and the data to write.
+
+    m:00,first-block-of-data
+    m:01,second-block-of-data
+    m:02,third-block-of-data
+    
+On the next connection, it will be reported as:
+
+    M:00,03,first-block-of-data
+    M:01,03,second-block-of-data
+    M:02,03,third-block-of-data
+
+Each block can be 1900 bytes. Input is not validated, so if you store something that the Max software doesn't understand, things will probably break.
+
 ## The M Message
 
 The M message looks like this:
