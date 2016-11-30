@@ -42,6 +42,7 @@ The RF flags field is set to 04 to address a group (room). For devices not tied 
     21  Remove link partner
     22  Set group address
     23  Remove group address
+    82  Enable/disable display of current temperature
 
 Note: other commands exist.
 
@@ -372,6 +373,20 @@ It is decoded as following:
     Not Used           1           00
     Room Nr            1           01
 
+## Command 82: enable/disable display of current temperature
+
+Command only works on wall thermostats.
+
+Has a single byte parameter after the header:
+
+    Description        Length      Example Value
+    =====================================================================
+    Header(BS+RF+Gr)   10          000082000000123ABC00
+    Setting            1           04
+
+A setting of 04 sets the thermostat to displaying the actual (measured) temperature, a setting of 00 (default) sets it to displaying the configured temperature setpoint.
+
+A thermstat that displays the actual temperature, will temporarily show the set temperature when + or - is pressed. Further presses of these buttons will change the setting.
 
 ## The S Message
 
