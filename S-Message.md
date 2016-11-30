@@ -32,7 +32,7 @@ In the rest of this document, the first 6 bytes together are referred to as the 
 
 The RF flags field is set to 04 to address a group (room). For devices not tied to a room this byte should be 00. The MAX! application software always links an device to a room.
 	
-## Command
+### Command
 
     40  Set tmperature
     10  Set program data
@@ -45,19 +45,19 @@ The RF flags field is set to 04 to address a group (room). For devices not tied 
 
 Note: other commands exist.
 
-## RF Address from
+### RF Address from
 
 This can be left at 000000.
 
-## RF Address to
+### RF Address to
 
 Set to the target device's RF address. Field seems to be ignored for group commands (so can be left at 000000).
 
-## Room nr
+### Room nr
 
 Group number of the receiving device(s).
 
-## the s Temperature and Mode setting command
+## Command 40: Temperature and Mode setting
 
     Description        Length      Example Value
     =====================================================================
@@ -113,12 +113,11 @@ In this example the temperature is set till Aug 29, 2011.
 
 Time until indicates to which date the given temperature is set. In this example it is set to 2:00 (04 * 0,5 hours = 2:00)
 
-## s command program setting
+## Command 10: program setting
 
 	s:AAQQAAAAD8OAAQJASUxuQMtNIE0gTSBNIA==
 
 Again the parameter is base64 encoded.
-w
 Converted to hex, this is: 
 
     00 04 10 00 00 00 0f c3  80 01 02 40 49 4c 6e 40
@@ -175,7 +174,7 @@ Time is the value * 5 minutes since midnight.
 
     49 (hex) = 73 (decimal) -> 73*5 = 365 -> 6:05
 
-## s command temperature setting
+## Command 11: temperature setting
 
 	s:AAARAAAAD8OAACshPQkHGAM=
 
@@ -223,7 +222,7 @@ Duration window open is simply the time in minutes * 5
     03 (hex) = 3 (decimal) -> 3*5 -> 15 (minutes)
 
 
-## s command config valve functions
+## Command 12: config valve functions
     
 	s:AAQSAAAAD8OAATIM/wA=\r\n
 
@@ -270,7 +269,7 @@ It is decoded as following:
                               101: thursday
                               110: friday
 
-## s command add link partner
+## Command 20: add link partner
     
     s:AAAgAAAAD8NzAA/a7QE=\r\n
 
@@ -303,7 +302,7 @@ Partner type tells what device the partner is.
 	Push Button		5
 
 
-## s command remove link partner
+## Command 21: remove link partner
 
     s:AAAhAAAAD8NzAA/a7QE=\r\n
 
@@ -335,7 +334,7 @@ Partner type tells what device the partner is.
 	Shutter Contact		4
 	Push Button		5
 
-## s command set group address
+## Command 22: set group address
 
     s:AAAiAAAAD8OAAAE=\r\n
 
@@ -354,7 +353,7 @@ It is decoded as following:
     Not Used           1           00
     Room Nr            1           01
 
-## s command remove group address
+## Command 23: remove group address
 
     s:AAAjAAAAD8OAAAE=\r\n
 
