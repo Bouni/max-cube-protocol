@@ -19,27 +19,43 @@ The first part of the s command  consists of following fields:
 
     Description        Length      Example Value
     =====================================================================
-    Base String        6           000440000000
-    RF Address         3           0FDAED
+    Unknown            1           00
+    RF flags           1           04
+    Command            1           40
+    RF Address from    3           000000
+    RF Address to      3           0FDAED
     Room nr            1           01
 
-### Base String
+In the rest of this document, the first 6 bytes together are referred to as the "base string".
 
-The base string is preceding the detailed settings and determines what parameter will be set.
+### RF flags
+
+The RF flags field is set to 04 to address a group (room). For devices not tied to a room this byte should be 00. The MAX! application software always links an device to a room.
 	
-	000440000000  for temperature and mode setting
-	000410000000  for program data setting
-	000011000000  for eco mode temperature setting
+## Command
 
-	000412000000  for config valve functions
-	000020000000  for add link partner
-	000021000000  for remove link partner
-	000022000000  for set group address
-	00??23000000  for remove group address
+    40  Set tmperature
+    10  Set program data
+    11  Set eco mode temperature
+    12  Config valve functions
+    20  Add link partner
+    21  Remove link partner
+    22  Set group address
+    23  Remove group address
 
-	Note other commands exist
-	Note. The 04 on 2nd byte in the base string seems to be depending on whether the command is send to a room or to a device.
-	For devices not tied to a room this byte should be 0. The MAX! application software always links an device to a room.
+Note: other commands exist.
+
+## RF Address from
+
+This can be left at 000000.
+
+## RF Address to
+
+Set to the target device's RF address. Field seems to be ignored for group commands (so can be left at 000000).
+
+## Room nr
+
+Group number of the receiving device(s).
 
 ## the s Temperature and Mode setting command
 
