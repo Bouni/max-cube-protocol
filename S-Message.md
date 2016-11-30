@@ -19,29 +19,46 @@ The first part of the s command  consists of following fields:
 
     Description        Length      Example Value
     =====================================================================
-    Base String        6           000440000000
-    RF Address         3           0FDAED
+    Unknown            1           00
+    RF flags           1           04
+    Command            1           40
+    RF Address from    3           000000
+    RF Address to      3           0FDAED
     Room nr            1           01
 
-### Base String
+In the rest of this document, the first 6 bytes together are referred to as the "base string".
 
-The base string is preceding the detailed settings and determines what parameter will be set.
+### RF flags
+
+The RF flags field is set to 04 to address a group (room). For devices not tied to a room this byte should be 00. The MAX! application software always links an device to a room.
 	
-	000440000000  for temperature and mode setting
-	000410000000  for program data setting
-	000011000000  for eco mode temperature setting
+### Command
 
-	000412000000  for config valve functions
-	000020000000  for add link partner
-	000021000000  for remove link partner
-	000022000000  for set group address
-	00??23000000  for remove group address
+    40  Set tmperature
+    10  Set program data
+    11  Set eco mode temperature
+    12  Config valve functions
+    20  Add link partner
+    21  Remove link partner
+    22  Set group address
+    23  Remove group address
+    82  Enable/disable display of current temperature
 
-	Note other commands exist
-	Note. The 04 on 2nd byte in the base string seems to be depending on whether the command is send to a room or to a device.
-	For devices not tied to a room this byte should be 0. The MAX! application software always links an device to a room.
+Note: other commands exist.
 
-## the s Temperature and Mode setting command
+### RF Address from
+
+This can be left at 000000.
+
+### RF Address to
+
+Set to the target device's RF address. Field seems to be ignored for group commands (so can be left at 000000).
+
+### Room nr
+
+Group number of the receiving device(s).
+
+## Command 40: Temperature and Mode setting
 
     Description        Length      Example Value
     =====================================================================
@@ -97,12 +114,11 @@ In this example the temperature is set till Aug 29, 2011.
 
 Time until indicates to which date the given temperature is set. In this example it is set to 2:00 (04 * 0,5 hours = 2:00)
 
-## s command program setting
+## Command 10: program setting
 
 	s:AAQQAAAAD8OAAQJASUxuQMtNIE0gTSBNIA==
 
 Again the parameter is base64 encoded.
-w
 Converted to hex, this is: 
 
     00 04 10 00 00 00 0f c3  80 01 02 40 49 4c 6e 40
@@ -159,7 +175,7 @@ Time is the value * 5 minutes since midnight.
 
     49 (hex) = 73 (decimal) -> 73*5 = 365 -> 6:05
 
-## s command temperature setting
+## Command 11: temperature setting
 
 	s:AAARAAAAD8OAACshPQkHGAM=
 
@@ -207,7 +223,7 @@ Duration window open is simply the time in minutes * 5
     03 (hex) = 3 (decimal) -> 3*5 -> 15 (minutes)
 
 
-## s command config valve functions
+## Command 12: config valve functions
     
 	s:AAQSAAAAD8OAATIM/wA=\r\n
 
@@ -254,7 +270,7 @@ It is decoded as following:
                               101: thursday
                               110: friday
 
-## s command add link partner
+## Command 20: add link partner
     
     s:AAAgAAAAD8NzAA/a7QE=\r\n
 
@@ -287,7 +303,7 @@ Partner type tells what device the partner is.
 	Push Button		5
 
 
-## s command remove link partner
+## Command 21: remove link partner
 
     s:AAAhAAAAD8NzAA/a7QE=\r\n
 
@@ -319,7 +335,7 @@ Partner type tells what device the partner is.
 	Shutter Contact		4
 	Push Button		5
 
-## s command set group address
+## Command 22: set group address
 
     s:AAAiAAAAD8OAAAE=\r\n
 
@@ -338,7 +354,7 @@ It is decoded as following:
     Not Used           1           00
     Room Nr            1           01
 
-## s command remove group address
+## Command 23: remove group address
 
     s:AAAjAAAAD8OAAAE=\r\n
 
@@ -357,6 +373,20 @@ It is decoded as following:
     Not Used           1           00
     Room Nr            1           01
 
+## Command 82: enable/disable display of current temperature
+
+Command only works on wall thermostats.
+
+Has a single byte parameter after the header:
+
+    Description        Length      Example Value
+    =====================================================================
+    Header(BS+RF+Gr)   10          000082000000123ABC00
+    Setting            1           04
+
+A setting of 04 sets the thermostat to displaying the actual (measured) temperature, a setting of 00 (default) sets it to displaying the configured temperature setpoint.
+
+A thermstat that displays the actual temperature, will temporarily show the set temperature when + or - is pressed. Further presses of these buttons will change the setting.
 
 ## The S Message
 
