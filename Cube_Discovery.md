@@ -52,6 +52,7 @@ There are several other UDP request types
     N   Get network address
     h   get URL information
     c   get network default info
+    R   reboot
 
 #### UDP Network request
 The network request needs to be made for a specific device hence the request  `"eQ3Max*\0" + serialnumber + "N"`
