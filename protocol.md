@@ -82,3 +82,8 @@ There are a lot of message types. I have not seen a lot of them yet, but the lis
     OUTGOING NTP SERVER:                  "f:"
     OUTGOING SEND WAKEUP:                 "z:"
 
+## Duty cycle
+
+The MAX! components communicate with eachother using the 868MHz frequency band. The use of his frequency band is regulated in various countries. This forces the components to respect a 1% rule on a per hour basis. This means that every MAX! device can send up to 1% of the time per hour, meaning 36 seconds per hour. If they exceed the 36 seconds, they must stop sending for the rest of this hour.
+
+The components keep track of used time in the duty_cycle field. The value is in %. So a duty_cycle value of 76 means that 76% of the hourly allowance has been used. When this value reaches 99% the component will stop sending messages. Every hour the value gets reset.
