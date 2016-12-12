@@ -47,6 +47,7 @@ Currently the following messages are described
 * [S Message: Send command](S-Message.md)
 * [T Command: Delete device](T-Command.md)
 * [U Message: URL configuration](U-Message.md)
+* [V Message: Date/time configuration](V-Message.md)
 * [Z Message: Wake up](Z-Message.md)
 
 If you want to contribute, pull requests are welcome!
