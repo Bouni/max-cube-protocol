@@ -28,6 +28,7 @@ This protocol is implemented in various opensource projects.
 	* [maxcul binding](https://github.com/openhab/openhab/tree/master/bundles/binding/org.openhab.binding.maxcul)
 * [pymax](https://github.com/ercpe/pymax) (Python)
 * [thermeq3](https://github.com/autopower/thermeq3) (Arduino Yún)
+* [maxcube-java](https://github.com/spinscale/maxcube-java/) (Java)
 
 General description on how to connect to the cube can be found in [protocol](protocol.md)
 
