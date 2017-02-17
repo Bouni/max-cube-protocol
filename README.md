@@ -1,7 +1,7 @@
 max-cube-protocol
 =================
 
-A attempt to write down the protocol of the eQ3 / ELV MAX! Heating system
+An attempt to write down the protocol of the eQ3 / ELV MAX! Heating system
 
 This protocol is implemented in various opensource projects.
 
