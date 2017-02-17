@@ -101,11 +101,11 @@ Date until indicates to which date the given temperature is set. It can be decod
                +-++++--------------- day: 1 1101 -> 29
                | ||||  
     dual: | 1001 1101 | 0000 1011 | (9D0B)
-            |||          | | ||||
-            |||          | +-++++--- year: 0 1011 -> 11 = year - 2000
-            |||          |                 (to get the actual year, 2000 must be added to the value: 11+2000 = 2011)
-            |||          |
-            +++----------+---------- month: 1000 -> 8
+            |||         |  | ||||
+            |||         |  +-++++--- year: 0 1011 -> 11 = year - 2000
+            |||         |                  (to get the actual year, 2000 must be added to the value: 11+2000 = 2011)
+            |||         |
+            +++---------+----------- month: 1000 -> 8
 
 In this example the temperature is set till Aug 29, 2011.
 
