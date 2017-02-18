@@ -36,12 +36,12 @@ If the submessage length is greater than 6, these fields follow:
     ==============================================================================
     7       Valve Position      1           128
     8       Temperature         1           14
-    9-10    Date Until          2           9D0B
+    9-10    Date Until          2           9D0B - Appears not to apply for heater thermostat
     11      Time Until          1           4
 
-The byte at offset 9 sometimes contains the heater thermostat actual temperature:
+The (LSB of byte at offset 9 * 256) plus byte at offset 10 sometimes contains the heater thermostat actual temperature:
 
-    9       Actual Temperature  1           205
+    9-10     Actual Temperature  2           205
 
 If the submessage length is 12 (for a WallMountedThermostat), the actual temperature is always provided here:
 
@@ -140,7 +140,7 @@ The mode here is not updated; the mode from the second flag byte is correct thou
 
     0000000000:                             9d 0b
 
-Date until indicates to which date the given temperature is set. It can be decoded as following:
+Date until indicates to which date the given temperature is set. It does not appear to apply to the radiator thermostat.  It can be decoded as following:
 
                +-++++--------------- day: 1 1101 -> 29
                | ||||  
@@ -161,11 +161,11 @@ Time until indicates to which date the given temperature is set. In this example
 
 ### Actual Temperature (HeaterThermostat)
 
-If a HeaterThermostat is in 'auto' mode, the actual temperature is sometimes returned at offset 8-9. This seems to only appear when the valve moves, although changing the set temperature might be enough. In adition, if the HeaterThermostat is in a room that has a linked WallMountedThermostat, this shows the temperature measured by the WallMountedThermostat instead.
+If a HeaterThermostat is in 'auto' mode, the actual temperature is sometimes returned at offset 9-10. This seems to only appear when the valve moves, although changing the set temperature might be enough. In adition, if the HeaterThermostat is in a room that has a linked WallMountedThermostat, this shows the temperature measured by the WallMountedThermostat instead.
 
-    8       Actual Temperature  2           205
+    9       Actual Temperature  2           205
 
-    offset|      8    | ... |      9    |
+    offset|      9    | ... |      10    |
     hex   |     01    |     |     32    |
     binary| 0000 0001 | ... | 0011 0010 |
                     |         |||| ||||
