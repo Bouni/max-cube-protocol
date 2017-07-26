@@ -176,7 +176,7 @@ If a HeaterThermostat is in 'auto' mode, the actual temperature is sometimes ret
     11      Actual Temperature  1           219
 
 Room temperature measured by the wall mounted thermostat in °C * 10. For example 0xDB = 219 = 21.9°C
-The temperature is represented by 9 bits; the 9th bit is available as the top bit at offset 7
+The temperature is represented by 9 bits; the 9th bit is available as the top bit at offset 8
 
     offset|      8    | ... |     12    |
     hex   |     B2    |     |     24    |
