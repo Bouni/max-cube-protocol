@@ -49,8 +49,8 @@ The second and last field contains a Base64 encoded string with the configuratio
 Position   Length   Information
 ===================================================
 0012       1        Is Portal Enabled
-0013-0033  32       Pushbutton Up config
-0034-0054  32       Pushbutton down config
+001E       1        Pushbutton Up config
+003F       1        Pushbutton down config
 0055-00D4  127      Portal URL
 00D5-00DA  5        TimeZone (Winter)
 00DB-00DB  1        TimeZone (Winter) - Month
@@ -62,8 +62,42 @@ Position   Length   Information
 00E8-00E8  1        TimeZone (Daylight Savings) - Weekday
 00E9-00E9  1        TimeZone (Daylight Savings) - Hour
 00EA-00ED  4        TimeZone (Daylight Savings) - offset to UTC
-
 ```
+
+Eco-Switch config
+
+it seems no clear bit-rule is given for the configuration, so the HEX value itself is analyzed
+
+Three modes with no Temp set
+```
+0x00 - Mode AUTO
+0x41 - Mode ECO
+0x42 - Mode COMFORT
+```
+
+Two modes with Temp set
+```
+0x09 <= byte <= 0x3d - Mode AUTO-TEMP
+0x49 <= byte <= 0x7d - Mode MANUAL
+```
+
+Temperature setting:
+
+The temperature goes from 5.0° to 30.0°, in steps of half a degree. 4.5 means "OFF" and 30.5 means "ON".
+Indeed, 52 steps are available (0x32-0x09 or 0x7d-0x49)
+The value can be calculated as follows (where baseValue is 0x09 for AUTO-TEMP and 0x49 for MANUAL):
+```
+TempSet = (byte - baseValue)/2 + 4.5
+```
+
+For the above example data this translates to
+```
+                 Raw   Decoded
+================================================================
+Pushbutton UP    00    Mode AUTO
+Pushbutton DOWN  41    Mode ECO
+```
+
 ## Heating thermostat C Message
 
 The first 18 bytes seem to contain the same type of information for all devices (except the Cube which seems to have one difference). The rest of the information is device specific.
