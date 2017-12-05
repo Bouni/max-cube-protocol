@@ -12,6 +12,11 @@ e.g with timeout of 60 sec (60 sec = 0003c in HEX)
 
     n:003c\r\n
 
+Important: 
+1. you can stop pairing mode whith an 'x:' command
+2. Before reading the response message wait until the chosen timeout has appeared or you have stopped pairing mode whith an 'x:' command.
+   If you don't do, it is possible that your response messages does not fit anymore to the corresponding commands because of an timeout while reading 
+   a response...  
  
 ## The N Message 
 
