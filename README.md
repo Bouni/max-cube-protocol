@@ -16,6 +16,7 @@ This protocol is implemented in various opensource projects.
 * [maxcube](https://github.com/aleszoulek/maxcube) (Python)
 * [Max::Cube](https://github.com/yoyostile/max-cube-ruby) (Ruby)
 * [Max::Cube](https://github.com/joconcepts/max-cube) (Ruby)
+* [maxcube-client](https://github.com/Tomaqa/maxcube-client) (Ruby)
 * [MAX-cube-ctl](https://github.com/pacostiro/MAX-cube-ctl) (C)
 * [MAXDebug](https://github.com/bietiekay/hacs/tree/master/tools/MAXDebug) (CS)
 * [MaxManager](https://github.com/ababilone/maxmanager) (CS)
