@@ -44,7 +44,7 @@ The RF flags field is set to 04 to address a group (room). For devices not tied 
     23  Remove group address
     82  Enable/disable display of current temperature
 
-Note: other commands exist.
+Note: other commands exist and it should be useful to send a wakeup (z: command) before
 
 ### RF Address from
 
@@ -155,8 +155,12 @@ It is decoded as following:
                  |
                  +----- telegram: 1: set
                                   0: not set
-                                  
-The meaning of telegram is unclear at the moment.
+
+### Telegram is used for setting the temperature and time.
+
+The thermostat supports 13 setting-points of temperatur and time for a weekly program. But the s-message with command 10
+does only allow 7 entries. Updating the lower 7 entries telegram is not set, updating the upper entries (only 6 entries 
+in this case) the flag telegram has to be set to 1.   
 
 ### Temperature and Time
 
