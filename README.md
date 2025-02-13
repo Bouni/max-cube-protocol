@@ -5,6 +5,7 @@ An attempt to write down the protocol of the eQ3 / ELV MAX! Heating system
 
 This protocol is implemented in various opensource projects.
 
+*[max-cube-control](https://github.com/m1kx/max-cube-control) (Typescript)
 * [eq3-max](https://github.com/Juerd/eq3-max) (Perl)
 * [FHEM](http://fhem.de/) (Perl)
 * [MAX_Boiler_Control](https://github.com/stephenmhall/MAX_Boiler_Control) (Python)
