@@ -31,6 +31,7 @@ This protocol is implemented in various opensource projects.
 * [pymax](https://github.com/ercpe/pymax) (Python)
 * [thermeq3](https://github.com/autopower/thermeq3) (Arduino Yún)
 * [maxcube-java](https://github.com/spinscale/maxcube-java/) (Java)
+* [max2mqtt](https://github.com/dktzde/max2mqtt) (Go, Home Assistant add-on; talks to the devices over the air with a CUL/CUN instead of a Cube)
 
 General description on how to connect to the cube can be found in [protocol](protocol.md)
 
