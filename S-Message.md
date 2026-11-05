@@ -156,6 +156,32 @@ It is decoded as following:
                  +----- telegram: 1: set
                                   0: not set
 
+### Day groups 7, 8 and 9 (seen over the air)
+
+Besides 0 to 6 (saturday to friday) a MAX! Radiator Thermostat+ also uses the day numbers 7, 8 and 9:
+
+    07: saturday + sunday
+    08: monday to friday
+    09: monday to sunday
+
+I found them by listening with a CUL in my living room. There are three MAX! Radiator Thermostat+ in this room,
+linked to each other only (no Cube, no gateway they are paired with). When I changed the week program on
+the display of one of them, it sent a WakeUp and then `0x10` (ConfigWeekProfile) telegrams to its two partners, one per day group instead of one per day.
+After I changed monday to friday, each partner got two telegrams (the payload starts with the day byte):
+
+    08 3c44 4ce4 3520 ...   day 8: 15 °C until 05:40, 19 °C until 19:00, 13 °C until 24:00
+    07 4042 4ee4 3920 ...   day 7: 16 °C until 05:30, 19.5 °C until 19:00, 14 °C until 24:00
+
+Day 8 holds exactly the monday to friday points I had set on the display, day 7 my saturday/sunday points.
+Both partners acknowledged both telegrams and switched to the new monday setpoint right away. Sending the
+program again from the display gave identical telegrams. When I chose "Mo-So" on the display, it sent a
+single telegram with day 9 to each partner, also acknowledged.
+
+I checked this on my Radiator Thermostat+: the transfer works, and afterwards the thermostats run the new
+week program. This works the same when max2mqtt sends day 7, 8 or 9 to a Radiator Thermostat+ paired with a CUL.
+
+Note that on air the second part of a day (points 8 to 13) is marked in the high nibble of the day byte (`0x1d`, as FHEM sends it), so 8 and 9 do not collide with it there.
+
 ### Telegram is used for setting the temperature and time.
 
 The thermostat supports 13 setting-points of temperatur and time for a weekly program. But the s-message with command 10
